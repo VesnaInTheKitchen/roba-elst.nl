@@ -116,6 +116,51 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* ── MOBILE ACCORDION: collapse sections so the page is scannable ── */
+  const collapsibleIds = ['verbouw','renovatie','badkamers','huisliften','velux','overkappingen','projecten'];
+  const mq = matchMedia('(max-width: 720px)');
+  function applyAccordion(on) {
+    collapsibleIds.forEach(id => {
+      const sec = document.getElementById(id);
+      if (!sec) return;
+      const header = sec.querySelector('.section-header');
+      if (!header) return;
+      if (on) {
+        sec.classList.add('collapsible');
+        if (!header.dataset.accBound) {
+          header.dataset.accBound = '1';
+          header.setAttribute('role', 'button');
+          header.setAttribute('tabindex', '0');
+          if (!header.querySelector('.acc-chevron')) {
+            const ch = document.createElement('span');
+            ch.className = 'acc-chevron';
+            ch.setAttribute('aria-hidden', 'true');
+            header.appendChild(ch);
+          }
+          const handler = () => sec.classList.toggle('expanded');
+          header.addEventListener('click', handler);
+          header.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handler(); }
+          });
+        }
+      } else {
+        sec.classList.remove('collapsible', 'expanded');
+      }
+    });
+  }
+  applyAccordion(mq.matches);
+  mq.addEventListener('change', e => applyAccordion(e.matches));
+
+  // If user taps a nav link, expand the target section on mobile
+  document.querySelectorAll('#nav-links a[href^="#"]').forEach(a => {
+    a.addEventListener('click', () => {
+      if (!mq.matches) return;
+      const id = a.getAttribute('href').slice(1);
+      const sec = document.getElementById(id);
+      if (sec && sec.classList.contains('collapsible')) sec.classList.add('expanded');
+    });
+  });
+
   /* ── SCROLL REVEALS ── */
   const revealEls = document.querySelectorAll('.reveal, .reveal-left');
   const obs = new IntersectionObserver((entries) => {
