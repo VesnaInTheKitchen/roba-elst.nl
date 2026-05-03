@@ -23,3 +23,6 @@ _originals_backup/
 
 # Local-only Netlify state
 .netlify/
+
+# Claude Code workspace state
+.claude/

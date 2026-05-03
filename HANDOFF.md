@@ -15,6 +15,7 @@ Built: May 2026 from a Claude Design handoff bundle.
 | Website | **Netlify** — site name `benevolent-unicorn-faaad1` |
 | Email `info@roba-elst.nl` | Still **yourhosting.nl** (MX → `*.yourfilter.nl`) |
 | Source code | `~/Desktop/roba-elst.nl/` on this Mac |
+| Source backup | <https://github.com/VesnaInTheKitchen/roba-elst.nl> (auto-deploys to Netlify on push) |
 | Netlify dashboard | <https://app.netlify.com/> |
 
 ---
