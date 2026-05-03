@@ -1,0 +1,46 @@
+# Security + caching headers for Netlify
+
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+
+# HTML — no long cache (we want fresh deploys to be picked up immediately)
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Static assets — long cache, served from CDN
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/styles.css
+  Cache-Control: public, max-age=86400, must-revalidate
+
+/app.js
+  Cache-Control: public, max-age=86400, must-revalidate
+
+# Project photo folders (referenced via images/manifest.js)
+/BADKAMERS/*
+  Cache-Control: public, max-age=31536000, immutable
+/HUISLIFTEN/*
+  Cache-Control: public, max-age=31536000, immutable
+/VERBOUW/*
+  Cache-Control: public, max-age=31536000, immutable
+/RENOVATIE/*
+  Cache-Control: public, max-age=31536000, immutable
+/VELUX/*
+  Cache-Control: public, max-age=31536000, immutable
+/OVERKAPPINGEN/*
+  Cache-Control: public, max-age=31536000, immutable
+/PROJECTEN/*
+  Cache-Control: public, max-age=31536000, immutable
+/ARCHIEF/*
+  Cache-Control: public, max-age=31536000, immutable

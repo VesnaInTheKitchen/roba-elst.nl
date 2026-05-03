@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://roba-elst.nl/sitemap.xml

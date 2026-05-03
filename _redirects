@@ -1,0 +1,4 @@
+# Canonical host: www → apex
+# (HTTP→HTTPS upgrade is handled automatically by Netlify once the cert is issued.)
+https://www.roba-elst.nl/* https://roba-elst.nl/:splat 301!
+http://www.roba-elst.nl/*  http://roba-elst.nl/:splat  301!

@@ -1,0 +1,25 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Local artefacts
+__pycache__/
+*.pyc
+
+# Temp / unused
+hero section.png
+roba-elst-deploy.zip
+
+# Large source bundle — don't push the design handoff to a public repo
+design/
+
+# Photo backup before in-place compression (kept locally, not in the deploy)
+_originals_backup/
+
+# Local-only Netlify state
+.netlify/

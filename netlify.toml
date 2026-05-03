@@ -1,0 +1,6 @@
+# Netlify build/deploy config
+# Drag-and-drop deploys still respect the [[headers]] and [[redirects]] blocks
+# via the bundled _headers / _redirects files.
+
+[build]
+  publish = "."
