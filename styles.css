@@ -518,6 +518,9 @@ footer .foot-links a:hover { color: var(--red); }
   margin-bottom: 48px;
 }
 
+/* Mobile-only marquee (hidden on desktop, redefined in mobile media query) */
+.mobile-marquee { display: none; }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 1024px) {
   .section { padding: 80px 28px 64px; }
@@ -573,34 +576,70 @@ footer .foot-links a:hover { color: var(--red); }
   .hero-bg { inset: 0; }
   .hero-photo-placeholder {
     background:
-      linear-gradient(to bottom, rgba(13,13,13,0.55) 0%, rgba(13,13,13,0.15) 30%, rgba(13,13,13,0.85) 80%, rgba(13,13,13,1) 100%),
+      linear-gradient(to bottom, rgba(13,13,13,0.25) 0%, rgba(13,13,13,0) 35%, rgba(13,13,13,0.65) 78%, rgba(13,13,13,1) 100%),
       url('assets/hero.png') center/cover no-repeat;
+  }
+  .hero-light {
+    background: radial-gradient(ellipse 70% 50% at 60% 40%, rgba(209,43,43,0.18) 0%, transparent 70%);
   }
   .hero-content { padding: 0 24px; }
   .hero-title { font-size: clamp(48px, 12vw, 80px); }
   .hero-strip { display: none; }
 
-  /* Accordion sections */
-  .section.collapsible { padding: 0; border-top: 1px solid #1a1a1a; }
+  /* Accordion sections — editorial, photo-backed bars */
+  .section.collapsible { padding: 0; border-top: 1px solid #1a1a1a; overflow: hidden; }
   .section.collapsible .section-bg-number { display: none; }
   .section.collapsible .section-header {
-    margin: 0; padding: 22px 20px;
+    margin: 0; padding: 36px 20px;
     cursor: pointer; user-select: none;
     align-items: center; gap: 14px;
-    position: relative;
-    transition: background 0.2s;
+    position: relative; overflow: hidden;
+    transition: padding 0.3s;
+    background: #0d0d0d;
+    min-height: 120px;
   }
-  .section.collapsible.section-alt .section-header { background: var(--bg2); }
-  .section.collapsible .section-header:active { background: #181818; }
-  .section.collapsible .section-title-line { display: none; }
-  .section.collapsible .section-title { font-size: 26px; }
+  /* Faded cover photo bleeds in from the right */
+  .section.collapsible .section-header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: var(--cover, none);
+    background-size: cover;
+    background-position: center right;
+    opacity: 0.32;
+    mask-image: linear-gradient(to right, transparent 0%, transparent 30%, #000 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 30%, #000 100%);
+    transition: opacity 0.4s, transform 0.6s;
+    transform: scale(1.05);
+    pointer-events: none;
+  }
+  .section.collapsible .section-header::after {
+    content: '';
+    position: absolute; left: 0; right: 0; bottom: 0;
+    height: 1px; background: linear-gradient(to right, var(--red) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .section.collapsible.expanded .section-header::before {
+    opacity: 0.18; transform: scale(1);
+  }
+  .section.collapsible .section-header > * { position: relative; z-index: 1; }
+  .section.collapsible .section-num {
+    padding-top: 0; font-size: 12px; letter-spacing: 4px;
+  }
+  .section.collapsible .section-title-line {
+    width: 28px; margin-top: 6px;
+    transition: width 0.4s;
+  }
+  .section.collapsible.expanded .section-title-line { width: 56px; }
+  .section.collapsible .section-title {
+    font-size: 32px; letter-spacing: 0;
+  }
   .section.collapsible .acc-chevron {
     margin-left: auto;
-    width: 12px; height: 12px;
+    width: 14px; height: 14px;
     border-right: 2px solid var(--red);
     border-bottom: 2px solid var(--red);
     transform: rotate(45deg);
-    transition: transform 0.25s;
+    transition: transform 0.35s ease-out;
     flex-shrink: 0;
   }
   .section.collapsible.expanded .acc-chevron { transform: rotate(-135deg); }
@@ -611,13 +650,69 @@ footer .foot-links a:hover { color: var(--red); }
   }
   .section.collapsible.expanded .project-grid {
     display: grid;
-    padding: 0 20px 40px;
+    padding: 18px 20px 40px;
+    animation: accFade 0.4s ease-out;
   }
   .section.collapsible.expanded .projecten-scroll {
     display: flex;
-    padding: 0 20px 12px;
+    padding: 18px 20px 12px;
+    animation: accFade 0.4s ease-out;
   }
   .section.collapsible.expanded .projecten-drag-hint { display: block; }
+  /* Stagger tiles in on expand */
+  .section.collapsible.expanded .project-grid .g-item {
+    opacity: 0; transform: translateY(14px);
+    animation: tileUp 0.5s ease-out forwards;
+  }
+  .section.collapsible.expanded .project-grid .g-item:nth-child(1) { animation-delay: 0.05s; }
+  .section.collapsible.expanded .project-grid .g-item:nth-child(2) { animation-delay: 0.10s; }
+  .section.collapsible.expanded .project-grid .g-item:nth-child(3) { animation-delay: 0.15s; }
+  .section.collapsible.expanded .project-grid .g-item:nth-child(4) { animation-delay: 0.20s; }
+  .section.collapsible.expanded .project-grid .g-item:nth-child(5) { animation-delay: 0.25s; }
+  .section.collapsible.expanded .project-grid .g-item:nth-child(6) { animation-delay: 0.30s; }
+  .section.collapsible.expanded .project-grid .g-item:nth-child(n+7) { animation-delay: 0.35s; }
+
+  /* Marquee strip under hero — replaces the desktop filmstrip on mobile */
+  .mobile-marquee {
+    display: block;
+    background: #0a0a0a;
+    border-bottom: 1px solid #1a1a1a;
+    overflow: hidden;
+    padding: 14px 0;
+    position: relative;
+  }
+  .mobile-marquee::before, .mobile-marquee::after {
+    content: ''; position: absolute; top: 0; bottom: 0; width: 40px;
+    z-index: 2; pointer-events: none;
+  }
+  .mobile-marquee::before { left: 0; background: linear-gradient(to right, #0a0a0a, transparent); }
+  .mobile-marquee::after { right: 0; background: linear-gradient(to left, #0a0a0a, transparent); }
+  .marquee-track {
+    display: flex; gap: 8px;
+    animation: marquee 40s linear infinite;
+    width: max-content;
+  }
+  .marquee-thumb {
+    flex-shrink: 0; width: 90px; height: 60px;
+    overflow: hidden;
+    border: 1px solid #1e1e1e;
+  }
+  .marquee-thumb img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: saturate(0.8);
+  }
+
+@keyframes accFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes tileUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
 
   .section { padding: 64px 20px 56px; }
   .section-header { gap: 14px; margin-bottom: 28px; }

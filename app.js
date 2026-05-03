@@ -127,6 +127,11 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!header) return;
       if (on) {
         sec.classList.add('collapsible');
+        // Set --cover from first project of this category for the photo-backed bar
+        const entry = data[id];
+        if (entry && entry.projects && entry.projects[0] && entry.projects[0].cover) {
+          header.style.setProperty('--cover', `url('${entry.projects[0].cover}')`);
+        }
         if (!header.dataset.accBound) {
           header.dataset.accBound = '1';
           header.setAttribute('role', 'button');
@@ -150,6 +155,34 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   applyAccordion(mq.matches);
   mq.addEventListener('change', e => applyAccordion(e.matches));
+
+  /* ── MOBILE MARQUEE: slow auto-scrolling strip of covers under hero ── */
+  function renderMobileMarquee() {
+    if (document.querySelector('.mobile-marquee')) return;
+    const hero = document.getElementById('hero');
+    if (!hero) return;
+    const all = [];
+    Object.entries(data).forEach(([cat, entry]) => {
+      if (cat === 'archief') return;
+      entry.projects.forEach(p => { if (p.cover) all.push(p.cover); });
+    });
+    if (!all.length) return;
+    // Shuffle, take 14
+    for (let i = all.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [all[i], all[j]] = [all[j], all[i]];
+    }
+    const picks = all.slice(0, 14);
+    // Duplicate for seamless loop
+    const doubled = [...picks, ...picks];
+    const wrap = document.createElement('div');
+    wrap.className = 'mobile-marquee';
+    wrap.innerHTML = `<div class="marquee-track">${
+      doubled.map(src => `<div class="marquee-thumb"><img src="${src}" loading="lazy" alt=""></div>`).join('')
+    }</div>`;
+    hero.parentNode.insertBefore(wrap, hero.nextSibling);
+  }
+  renderMobileMarquee();
 
   // If user taps a nav link, expand the target section on mobile
   document.querySelectorAll('#nav-links a[href^="#"]').forEach(a => {
