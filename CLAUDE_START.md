@@ -28,7 +28,7 @@ Today's task: <DESCRIBE WHAT YOU WANT TO CHANGE>
 
 - *"Update the phone number from X to Y everywhere it appears."*
 - *"Add a new project folder under VERBOUW called `<name>` with photos I just dropped in there. Pick a sensible cover."*
-- *"Re-shoot the hero — replace `assets/hero.png` with the new file I'll put on the desktop."*
+- *"Re-shoot the hero — replace `assets/hero.jpg` with the new file I'll put on the desktop."* (resize to ≤1920w, JPG quality ~75, target ≤500 KB)
 - *"Change the red accent colour from `#d12b2b` to `<new hex>`."*
 - *"Add a section about <new service> after Overkappingen."*
 - *"Set up email notifications for the Netlify contact form to info@roba-elst.nl."*
@@ -48,10 +48,30 @@ These are deliberately user-only (per safety rules) — Claude will refuse:
 
 ---
 
-## State of the project as of last session (2026-05-03)
+## State of the project as of last session (2026-05-05)
 
 - ✅ Site live, HTTPS working
 - ✅ GitHub repo + Netlify auto-deploy connected
-- ✅ Netlify Forms enabled (but email notifications NOT yet configured)
-- ✅ Photos: 80 projects, 728 photos across 8 categories
-- ⏳ Pending: email notifications for form, Google Search Console, Google Business Profile, Lighthouse pass, privacy note
+- ✅ Netlify Forms enabled (email notifications still NOT configured — see #1 below)
+- ✅ Photos: 80 projects, 730 photos across 8 categories
+- ✅ Privacy page at `/privacy.html`, linked from footer, in sitemap
+- ✅ Mobile editorial polish (accordion sections, photo-backed bars, marquee under hero)
+- ✅ Performance pass: logo 3.5MB → 45KB, hero PNG → 487KB JPG, fonts non-blocking,
+     filmstrip + marquee deferred. Lighthouse desktop: Perf 85 / A11y 95 / BP 100 / SEO 100.
+- ✅ Google Search Console: domain property verified, sitemap submitted
+- ✅ Google Business Profile already exists (review/refresh recommended — see HANDOFF)
+- ⏳ Pending:
+  - Email notifications for the contact form (Netlify dashboard, 1 min)
+  - GBP refresh: confirm website URL, categories, photos, ask for reviews
+  - Optional perf polish: hero `<link rel=preload>` and/or batch convert covers to WebP
+
+## Gotchas to remember
+
+- **macOS Finder/iCloud creates `* 2` duplicate files and folders** that bloat the repo.
+  `.gitignore` now blocks them, but if you ever see them in `git status`, run:
+  `find . -type d -name "* 2" -not -path "./design/*" -not -path "./_originals_backup/*" -delete`
+- **Always run `python3 build-manifest.py` after changing photos** — gallery is generated from folder structure.
+- **Never commit `assets/hero.png` again** — it's now `hero.jpg`. Don't accidentally restore the 2 MB original.
+- **Netlify free tier: 300 build credits/month, 100 form submissions/month, 100 GB bandwidth.**
+  The `Sir Henry catering` team holds three sites (Roba, Sir Henry, plus one auto-named).
+  Heavy iteration days can burn through credits — once stable, monthly use is ~10–20 min.

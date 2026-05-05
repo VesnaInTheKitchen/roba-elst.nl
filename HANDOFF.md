@@ -163,6 +163,21 @@ Open Claude Code in this folder and say: *"I want to add X to the Roba Elst site
 - ✅ SEO: meta tags, OG/Twitter cards, JSON-LD LocalBusiness, sitemap.xml, robots.txt
 - ✅ Velux® trademark rendered everywhere it appears
 - ✅ Dynamic gallery from folder structure with lightbox + keyboard nav
+- ✅ **Privacy page** at `/privacy.html`, linked from footer, in sitemap. GDPR-compliant.
+- ✅ **Mobile editorial polish** — accordion sections (tap to expand), photo-backed bars,
+     auto-scrolling marquee under hero, brighter hero, taller solid nav.
+- ✅ **Performance optimised** — logo 3.5MB → 45KB, hero PNG → 487KB JPG,
+     Google Fonts non-blocking, hero filmstrip + marquee deferred to idle.
+- ✅ **Form autocomplete** — name/tel/email fields have correct autocomplete attributes.
+- ✅ **Google Search Console** — domain property verified via TXT, sitemap submitted.
+- ✅ **Google Business Profile** — already existed; should be reviewed (categories, website
+     URL, photos, reviews — see "Optional next steps").
+
+### Lighthouse (May 2026, desktop)
+- Performance **85** (LCP 4.2s — the editorial hero is the trade-off; FCP 1.7s, TBT 0ms, CLS 0)
+- Accessibility **95**
+- Best Practices **100**
+- SEO **100**
 
 ## What's deliberately NOT set up
 
@@ -176,10 +191,15 @@ Open Claude Code in this folder and say: *"I want to add X to the Roba Elst site
 ## Optional next steps
 
 1. **Email notifications for the contact form** — Netlify dashboard → Forms → contact → Form notifications → Add notification → Email → `info@roba-elst.nl`.
-2. **Submit sitemap to Google** — <https://search.google.com/search-console> → Add property `roba-elst.nl` → verify via DNS TXT (yourhosting.nl) → Sitemaps → submit `sitemap.xml`.
-3. **Google Business Profile** — <https://business.google.com> → claim "Roba Bouwbedrijf Elst". Maps + local search.
-4. **Privacy note** — small `/privacy.html` page linked from footer (1-line GDPR compliance).
-5. **Lighthouse audit** — Chrome DevTools → Lighthouse → run on the live URL. Aim for ≥90 across the board.
+2. **Review Google Business Profile** — <https://business.google.com>:
+   - Confirm website is `https://roba-elst.nl/` (old listings often point at the WordPress URL).
+   - Primary category **Bouwbedrijf**; add secondary *Aannemer*, *Badkamerinstallateur*, *Renovatiebedrijf*, *Dakraaminstallateur*.
+   - Service area: Elst, Arnhem, Nijmegen, Gelderland.
+   - Upload 15–20 project photos (badkamers, verbouw, hero, logo).
+   - Ask 3–5 happy past customers for reviews — biggest local-ranking factor.
+   - Post a short update once a month (signals "active" to Google).
+3. **Lower hero LCP if SEO suffers** — preload `assets/hero.jpg` with `<link rel="preload" as="image" fetchpriority="high">`, OR convert hero to `<img>` tag. Note: a previous attempt made the hero too bright; revert if it impacts the look.
+4. **Convert covers to WebP** — biggest remaining perf win. ~30–40% size reduction across 80 cover photos. `for f in **/cover.jpg; do cwebp -q 80 "$f" -o "${f%.jpg}.webp"; done` plus a manifest update.
 
 ---
 
