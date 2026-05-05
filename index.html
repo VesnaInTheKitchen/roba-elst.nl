@@ -97,7 +97,8 @@
 <!-- HERO -->
 <section id="hero">
   <div class="hero-bg" id="hero-parallax">
-    <div class="hero-photo-placeholder"></div>
+    <img class="hero-photo" src="assets/hero.jpg" alt="Roba Bouwbedrijf bus voor het pand in Elst" fetchpriority="high" decoding="async" width="1920" height="1280">
+    <div class="hero-photo-overlay"></div>
     <div class="hero-light" id="hero-light"></div>
   </div>
   <div class="hero-stack">
@@ -257,16 +258,16 @@
       <div class="form-row">
         <div class="form-field">
           <label for="f-naam">Naam</label>
-          <input id="f-naam" name="Naam" type="text" placeholder="Uw naam" required>
+          <input id="f-naam" name="Naam" type="text" placeholder="Uw naam" autocomplete="name" required>
         </div>
         <div class="form-field">
           <label for="f-tel">Telefoon</label>
-          <input id="f-tel" name="Telefoon" type="tel" placeholder="06-...">
+          <input id="f-tel" name="Telefoon" type="tel" placeholder="06-..." autocomplete="tel">
         </div>
       </div>
       <div class="form-field">
         <label for="f-email">E-mailadres</label>
-        <input id="f-email" name="Email" type="email" placeholder="email@adres.nl" required>
+        <input id="f-email" name="Email" type="email" placeholder="email@adres.nl" autocomplete="email" required>
       </div>
       <div class="form-field">
         <label for="f-cat">Werkzaamheden</label>
