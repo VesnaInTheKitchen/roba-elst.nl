@@ -18,23 +18,29 @@
 <meta property="og:url" content="https://roba-elst.nl/">
 <meta property="og:title" content="Roba Bouwbedrijf Elst — Verbouw · Renovatie · Onderhoud">
 <meta property="og:description" content="Vakmanschap voor verbouw, renovatie, badkamers, huisliften, Velux® dakramen en overkappingen in Elst en omgeving.">
-<meta property="og:image" content="https://roba-elst.nl/assets/hero.png">
+<meta property="og:image" content="https://roba-elst.nl/assets/hero.jpg">
 <meta property="og:image:alt" content="Roba Bouwbedrijf bus voor het pand in Elst">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Roba Bouwbedrijf Elst">
 <meta name="twitter:description" content="Verbouw, renovatie, badkamers, huisliften en Velux® dakramen — al meer dan 20 jaar uw vakman in Elst.">
-<meta name="twitter:image" content="https://roba-elst.nl/assets/hero.png">
+<meta name="twitter:image" content="https://roba-elst.nl/assets/hero.jpg">
 
 <!-- Favicon -->
 <link rel="icon" type="image/png" href="assets/Roba_logo.png">
 <link rel="apple-touch-icon" href="assets/Roba_logo.png">
 
-<!-- Fonts -->
+<!-- Preload hero so it can paint immediately (largest contentful element) -->
+<link rel="preload" as="image" href="assets/hero.jpg" fetchpriority="high">
+
+<!-- Fonts (non-blocking: load in parallel, no render block) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,500;0,700;0,800;1,300&family=Barlow:wght@300;400;500&family=Crimson+Pro:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,500;0,700;0,800;1,300&family=Barlow:wght@300;400;500&family=Crimson+Pro:ital,wght@1,400;1,600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,500;0,700;0,800;1,300&family=Barlow:wght@300;400;500&family=Crimson+Pro:ital,wght@1,400;1,600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,500;0,700;0,800;1,300&family=Barlow:wght@300;400;500&family=Crimson+Pro:ital,wght@1,400;1,600&display=swap"></noscript>
+
 <link rel="stylesheet" href="styles.css">
 
 <!-- Structured data: LocalBusiness -->
@@ -45,7 +51,7 @@
   "name": "Roba Bouwbedrijf",
   "alternateName": "Roba Elst",
   "url": "https://roba-elst.nl/",
-  "image": "https://roba-elst.nl/assets/hero.png",
+  "image": "https://roba-elst.nl/assets/hero.jpg",
   "logo": "https://roba-elst.nl/assets/Roba_logo.png",
   "telephone": "+31-6-20356519",
   "email": "info@roba-elst.nl",

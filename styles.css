@@ -103,7 +103,7 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate
   position: absolute; inset: 0;
   background:
     linear-gradient(to bottom, rgba(13,13,13,0.35) 0%, rgba(13,13,13,0.05) 35%, rgba(13,13,13,0.75) 80%, rgba(13,13,13,1) 100%),
-    url('assets/hero.png') center/cover no-repeat;
+    url('assets/hero.jpg') center/cover no-repeat;
   background-color: #0e0e0e;
 }
 .hero-light {
@@ -577,7 +577,7 @@ footer .foot-links a:hover { color: var(--red); }
   .hero-photo-placeholder {
     background:
       linear-gradient(to bottom, rgba(13,13,13,0.25) 0%, rgba(13,13,13,0) 35%, rgba(13,13,13,0.65) 78%, rgba(13,13,13,1) 100%),
-      url('assets/hero.png') center/cover no-repeat;
+      url('assets/hero.jpg') center/cover no-repeat;
   }
   .hero-light {
     background: radial-gradient(ellipse 70% 50% at 60% 40%, rgba(209,43,43,0.18) 0%, transparent 70%);

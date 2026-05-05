@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
           item.dataset.cat = cat; item.dataset.idx = i;
           const year = (p.title.match(/(19|20)\d{2}/) || [''])[0];
           item.innerHTML = `
-            <div class="g-fill"><img src="${p.cover}" loading="lazy" alt=""></div>
+            <div class="g-fill"><img src="${p.cover}" loading="lazy" decoding="async" alt=""></div>
             <div class="arch-year">${year || ''}</div>
           `;
           host.appendChild(item);
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         item.dataset.cat = cat; item.dataset.idx = i;
         item.innerHTML = `
-          <div class="g-fill g-tall"><img src="${p.cover}" loading="lazy" alt=""></div>
+          <div class="g-fill g-tall"><img src="${p.cover}" loading="lazy" decoding="async" alt=""></div>
           ${corners()}
           <div class="tile-label">
             <span class="tile-title">${p.title}</span>
@@ -71,13 +71,15 @@ document.addEventListener('DOMContentLoaded', () => {
       a.href = '#' + cat;
       a.dataset.cat = cat; a.dataset.idx = idx;
       a.innerHTML = `
-        <div class="strip-thumb-inner"><img src="${project.cover}" loading="lazy" alt=""></div>
+        <div class="strip-thumb-inner"><img src="${project.cover}" loading="lazy" decoding="async" alt=""></div>
         <div class="strip-thumb-label">${project.title}</div>
       `;
       strip.insertBefore(a, more);
     });
   }
-  renderHeroStrip();
+  // Defer to idle so hero paints first
+  const idle = window.requestIdleCallback || (cb => setTimeout(cb, 200));
+  idle(() => renderHeroStrip());
 
   /* ── HERO PARALLAX (mouse) — keep, it's subtle and improves desktop feel ── */
   if (!matchMedia('(pointer: coarse)').matches) {
@@ -178,11 +180,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const wrap = document.createElement('div');
     wrap.className = 'mobile-marquee';
     wrap.innerHTML = `<div class="marquee-track">${
-      doubled.map(src => `<div class="marquee-thumb"><img src="${src}" loading="lazy" alt=""></div>`).join('')
+      doubled.map(src => `<div class="marquee-thumb"><img src="${src}" loading="lazy" decoding="async" alt=""></div>`).join('')
     }</div>`;
     hero.parentNode.insertBefore(wrap, hero.nextSibling);
   }
-  renderMobileMarquee();
+  idle(() => renderMobileMarquee());
 
   // If user taps a nav link, expand the target section on mobile
   document.querySelectorAll('#nav-links a[href^="#"]').forEach(a => {
