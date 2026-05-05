@@ -99,18 +99,6 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate
   background: #0d0d0d;
   will-change: transform;
 }
-.hero-photo {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  display: block;
-  background: #0e0e0e;
-}
-.hero-photo-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to bottom, rgba(13,13,13,0.35) 0%, rgba(13,13,13,0.05) 35%, rgba(13,13,13,0.75) 80%, rgba(13,13,13,1) 100%);
-  pointer-events: none;
-}
 .hero-photo-placeholder {
   position: absolute; inset: 0;
   background:
@@ -156,9 +144,11 @@ body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate
 }
 .hero-strip {
   position: relative; z-index: 3;
-  padding: 16px 40px 20px;
+  padding: 18px 40px 22px;
   display: flex; align-items: flex-end; gap: 6px;
   overflow: hidden;
+  background: #0a0a0a;
+  border-bottom: 1px solid #1a1a1a;
 }
 .hero-strip .strip-label {
   font-family: 'Barlow Condensed', sans-serif;
@@ -586,8 +576,10 @@ footer .foot-links a:hover { color: var(--red); }
   /* Shorter hero on mobile so photo doesn't dominate */
   #hero { height: 78vh; min-height: 520px; }
   .hero-bg { inset: 0; }
-  .hero-photo-overlay {
-    background: linear-gradient(to bottom, rgba(13,13,13,0.25) 0%, rgba(13,13,13,0) 35%, rgba(13,13,13,0.65) 78%, rgba(13,13,13,1) 100%);
+  .hero-photo-placeholder {
+    background:
+      linear-gradient(to bottom, rgba(13,13,13,0.25) 0%, rgba(13,13,13,0) 35%, rgba(13,13,13,0.65) 78%, rgba(13,13,13,1) 100%),
+      url('assets/hero.jpg') center/cover no-repeat;
   }
   .hero-light {
     background: radial-gradient(ellipse 70% 50% at 60% 40%, rgba(209,43,43,0.18) 0%, transparent 70%);
