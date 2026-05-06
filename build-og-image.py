@@ -47,33 +47,40 @@ img = img.convert("RGBA")
 img = Image.alpha_composite(img, overlay)
 img = Image.alpha_composite(img, black)
 
-# 3. Red accent bar
-draw = ImageDraw.Draw(img)
-draw.rectangle([60, 120, 70, 230], fill=(209, 43, 43, 255))
+# 3. Logo top-left (transparent black bg blends with darkened photo)
+logo = Image.open("assets/Roba_logo.png").convert("RGBA")
+logo_h = 150
+lw, lh = logo.size
+logo = logo.resize((int(lw * logo_h / lh), logo_h), Image.LANCZOS)
+img.paste(logo, (88, 70), logo)
 
-# 4. Text
+# 4. Red accent bar
+draw = ImageDraw.Draw(img)
+draw.rectangle([60, 260, 70, 360], fill=(209, 43, 43, 255))
+
+# 5. Text
 try:
-    f_head = ImageFont.truetype(FONT_BOLD, 78, index=1)
+    f_head = ImageFont.truetype(FONT_BOLD, 70, index=1)
 except Exception:
-    f_head = ImageFont.truetype(FONT_BOLD, 78)
+    f_head = ImageFont.truetype(FONT_BOLD, 70)
 try:
-    f_sub = ImageFont.truetype(FONT_REG, 34, index=0)
+    f_sub = ImageFont.truetype(FONT_REG, 30, index=0)
 except Exception:
-    f_sub = ImageFont.truetype(FONT_REG, 34)
+    f_sub = ImageFont.truetype(FONT_REG, 30)
 try:
-    f_cta = ImageFont.truetype(FONT_BOLD, 28, index=1)
+    f_cta = ImageFont.truetype(FONT_BOLD, 26, index=1)
 except Exception:
-    f_cta = ImageFont.truetype(FONT_BOLD, 28)
+    f_cta = ImageFont.truetype(FONT_BOLD, 26)
 
 # Eyebrow label
-draw.text((100, 110), "BOUWBEDRIJF · ELST", font=f_cta, fill=(209, 43, 43, 255))
+draw.text((100, 252), "BOUWBEDRIJF · ELST", font=f_cta, fill=(209, 43, 43, 255))
 # Headline
-draw.text((98, 155), HEADLINE, font=f_head, fill=(245, 240, 232, 255))
+draw.text((98, 290), HEADLINE, font=f_head, fill=(245, 240, 232, 255))
 # Subline
-draw.text((100, 260), SUBLINE, font=f_sub, fill=(220, 215, 205, 255))
+draw.text((100, 380), SUBLINE, font=f_sub, fill=(220, 215, 205, 255))
 
 # CTA pill bottom-left
-cta_x, cta_y = 100, 510
+cta_x, cta_y = 100, 520
 bbox = draw.textbbox((cta_x, cta_y), CTA, font=f_cta)
 pad_x, pad_y = 22, 14
 draw.rounded_rectangle(
